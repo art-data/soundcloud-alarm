@@ -1,0 +1,21 @@
+http://api.soundcloud.com/users/17539752/favorites?client_id=4e34e0ce2f08f7a3107c9efdd4a61970
+
+curl -v 'http://api.soundcloud.com/resolve?url=http://soundcloud.com/violet-forest&client_id=4e34e0ce2f08f7a3107c9efdd4a61970
+
+https://api.soundcloud.com/users/17539752?client_id=4e34e0ce2f08f7a3107c9efdd4a61970
+
+SC.get("/users/[user]/favorites", function(tracks){
+  SC.stream("/tracks/"+tracks[0].id, function(sound){
+    sound.play();
+  });
+});
+
+//https://developers.soundcloud.com/docs/api/sdks#javascript
+
+<script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+<script>
+  SC.initialize({
+    client_id: 'YOUR_CLIENT_ID',
+    redirect_uri: 'http://example.com/callback'
+  });
+</script>

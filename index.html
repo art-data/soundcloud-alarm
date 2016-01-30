@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Soundcloud Alarm Clock</title>
+</head>
+
+<body>
+  <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+  <script>
+    SC.initialize({
+      client_id: '4e34e0ce2f08f7a3107c9efdd4a61970',
+      redirect_uri: 'http://localhost:8000/callback.html'
+    });
+    console.log('initialize');
+
+    SC.connect().then(function(){
+      debugger
+      console.log('connect');
+      // return SC.put('/me/followings/183');
+      SC.get("/me/favorites", function(tracks){
+        debugger
+        console.log(tracks);
+        alert('lkajdf' + tracks);
+        SC.stream("/tracks/"+tracks[0].id, function(sound){
+          console.log(sound);
+          sound.play();
+        });
+      });
+    }).catch(function(error){
+      debugger
+      alert('Error: ' + error.message);
+    });
+  </script>
+</body>
+</html>
+
+
