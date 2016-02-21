@@ -37,6 +37,7 @@
     <form id="searchForm">
       <input type="text" id="url" placeholder="A track's URL" autofocus />
     </form>
+    <button onclick="search()">Go</button>
     <div id="info">
       <span id="title"></span>
       <button id="play">play</button>
@@ -63,7 +64,6 @@
         return SC.stream('/tracks/' + track.id)
         .then(function(player){
           title.innerText = track.title;
-          info.style.display = 'inline-block';
 
           // this is where it plays it
           console.log("the current time in the form is", timeField.value)
@@ -73,13 +73,23 @@
           }
           currentPlayer = player;
           var theDateTimeFromTheForm = new Date(dateField.value + " " + timeField.value)
-          console.log("the current time is",
-                      new Date(),
-                      "the datetime from the form is",
-                      theDateTimeFromTheForm,
-                      "is the current datetime less than the time from the form?",
-                      new Date() < theDateTimeFromTheForm)
-          player.play();
+          var checkTimePlay = function(){
+            console.log("the current time is",
+                        new Date(),
+                        "the datetime from the form is",
+                        theDateTimeFromTheForm,
+                        "is the current datetime less than the time from the form?",
+                        new Date() < theDateTimeFromTheForm)
+            var alarmGoesOff = new Date() > theDateTimeFromTheForm
+            if (alarmGoesOff) {
+              player.play()
+              console.log('playing the thing')
+            } else {
+              setTimeout(checkTimePlay, 1000)
+              console.log('waiting')
+            }
+          }
+          checkTimePlay()
         })
         .catch(function(arguments){
           console.log(arguments);
@@ -88,8 +98,7 @@
 
       // this function gets a track object by searching based on the input fields
       // and then calls the streamtrack function above
-      var search = function(event){
-        event.preventDefault();
+      var search = function() {
         SC.resolve(inputField.value).then(streamTrack);
       };
 
