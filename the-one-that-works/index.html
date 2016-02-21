@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>SDK playground - Streaming</title>
+    <script type="text/javascript" src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+    <style media="screen">
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: sans-serif;
+      }
+      input {
+        font-size: 20px;
+      }
+      #info {
+        display: none;
+      }
+      input, p {
+        width: 90%;
+        margin-bottom: 10px;
+        margin-top: 0;
+      }
+      @media (min-width: 500px) {
+        input, p {
+          width: 500px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <form id="timeForm">
+      <input id="date" type="date">
+      <input id="time" type="time">
+    </form>
+    <form id="searchForm">
+      <input type="text" id="url" placeholder="A track's URL" autofocus />
+    </form>
+    <div id="info">
+      <span id="title"></span>
+      <button id="play">play</button>
+      <button id="pause">pause</button>
+    </div>
+
+
+    <script type="text/javascript">
+      // initializing a thing
+      SC.initialize({
+        client_id: '4e34e0ce2f08f7a3107c9efdd4a61970'
+      });
+      // getting some stuff from the html
+      var dateField = document.getElementById('date');
+      var timeField = document.getElementById('time');
+      var inputField = document.getElementById('url');
+      var title = document.getElementById('title');
+      var info = document.getElementById('info');
+
+      var currentPlayer;
+
+      // it looks like this function actually streams // plays the song
+      var streamTrack = function(track){
+        return SC.stream('/tracks/' + track.id)
+        .then(function(player){
+          title.innerText = track.title;
+          info.style.display = 'inline-block';
+
+          // this is where it plays it
+          console.log("the current time in the form is", timeField.value)
+          console.log("the current date in the form is", dateField.value)
+          if (currentPlayer) {
+            currentPlayer.pause();
+          }
+          currentPlayer = player;
+          var theDateTimeFromTheForm = new Date(dateField.value + " " + timeField.value)
+          console.log("the current time is",
+                      new Date(),
+                      "the datetime from the form is",
+                      theDateTimeFromTheForm,
+                      "is the current datetime less than the time from the form?",
+                      new Date() < theDateTimeFromTheForm)
+          player.play();
+        })
+        .catch(function(arguments){
+          console.log(arguments);
+        });
+      };
+
+      // this function gets a track object by searching based on the input fields
+      // and then calls the streamtrack function above
+      var search = function(event){
+        event.preventDefault();
+        SC.resolve(inputField.value).then(streamTrack);
+      };
+
+      // start listening to the forms i guess
+      document.getElementById('searchForm').addEventListener('submit', search);
+      document.getElementById('pause').addEventListener('click', function(){
+        if (currentPlayer) {
+          currentPlayer.pause();
+        }
+      });
+      document.getElementById('play').addEventListener('click', function(){
+        if (currentPlayer) {
+          currentPlayer.play();
+        }
+      });
+    </script>
+  </body>
+</html>
