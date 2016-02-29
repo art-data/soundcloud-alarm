@@ -82,6 +82,7 @@
       var createPlayer = function (e) {
         console.log('creating a player for ' + inputField.value)
         $('body').append('<a class="sc-player" href=' + inputField.value + ">player</a>")
+        $('a.sc-player, div.sc-player').scPlayer()
       }
     </script>
   </body>
