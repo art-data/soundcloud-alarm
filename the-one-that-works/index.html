@@ -36,7 +36,7 @@
     <form id="searchForm">
       <input type="text" id="url" placeholder="A track's URL" autofocus />
     </form>
-    <button onclick="search()">Go</button>
+    <button onclick="createPlayer()">Go</button>
     <div id="info">
       <span id="title"></span>
       <button id="play">play</button>
@@ -81,7 +81,7 @@
       checkTimePlay()
 
       // create player when the user clicks submit
-      document.getElementById('searchForm').addEventListener('submit', function () {
+      var createPlayer = function (e) {
         $('body').append('<a href=' + inputField.value + ">player</a>")
       })
     </script>
