@@ -84,7 +84,7 @@
                         "is the current datetime less than the time from the form?",
                         new Date() < theDateTimeFromTheForm)
             var alarmGoesOff = new Date() > theDateTimeFromTheForm
-            if (alarmGoesOff) {
+            if (true || alarmGoesOff) {
               player.play()
               console.log('playing the thing')
             } else {
