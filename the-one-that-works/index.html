@@ -43,8 +43,6 @@
       <button id="pause">pause</button>
     </div>
 
-    <a href="http://soundcloud.com/matas/hobnotropic" class="sc-player">My new dub track</a>
-
     <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
     <script type="text/javascript" src="../soundcloud-custom-player/js/soundcloud.player.api.js"></script>
     <script type="text/javascript" src="../soundcloud-custom-player/js/sc-player.js"></script>
@@ -82,7 +80,7 @@
 
       // create player when the user clicks submit
       var createPlayer = function (e) {
-        $('body').append('<a href=' + inputField.value + ">player</a>")
+        $('body').append('<a class="sc-player" href=' + inputField.value + ">player</a>")
       })
     </script>
   </body>
