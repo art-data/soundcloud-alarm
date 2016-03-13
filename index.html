@@ -95,8 +95,13 @@
         // findThePlayButtonAndClickOnIt()
       }
       var findThePlayButtonAndClickOnIt = function() {
-        var playButton = $('a.sc-play')
-        playButton.click()
+        $('a.sc-play').click()
+        setTimeout(function() {
+          $('a.sc-pause').click()
+        }, 1000)
+        setTimeout(function() {
+          $('a.sc-play').click()
+        }, 2000)
       }
     </script>
   </body>
