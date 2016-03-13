@@ -9,9 +9,6 @@ body {
 h1 {
   border-bottom: 1px dashed #fff;
   padding: 20px 0;
- -webkit-transform: rotate(9deg);
- -moz-transform: rotate(9deg);
- transform: rotate(9deg);
 }
 
 h2 {
