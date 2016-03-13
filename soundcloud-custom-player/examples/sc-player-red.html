@@ -1,46 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-
   <head>
-
     <title>SC player example: Red Skin</title>
     <link rel="stylesheet" href="../css/sc-player-red.css" type="text/css">
-
   </head>
-
   <body>
    <div class="wrapper">
-    <h1>Showcasing Music</h1>
-
-      <div class="post">
-        <h2>My Favorites</h2>
-
-        <div class="sc-player">
-          <a href="http://soundcloud.com/matas/hobnotropic">My dub track</a>
-          <a href="http://soundcloud.com/forss/forss-vs-borg-deadline-live-in-milan-2004">Forss</a>
-          <a href="http://soundcloud.com/matas/matas-petrikas-live-at-gravity-club-30-05-2008">My dub track</a>
-          <a href="http://soundcloud.com/matas/goldfrapp-little-bird-matas-ornitologic-remix">Pumpkins Track</a>
-          <a href="http://soundcloud.com/matas/on-the-bridge">Oxxo</a>
-          <a href="http://soundcloud.com/matas/matas-petrikas-live-at-gravity-club-30-05-2008">My dub track</a>
-          <a href="http://soundcloud.com/matas/goldfrapp-little-bird-matas-ornitologic-remix">Pumpkins Track</a>
-          <a href="http://soundcloud.com/matas/on-the-bridge">Oxxo</a>
-        </div>
-
-
-        <h2>My Tracks</h2>
-
-        <a href="http://soundcloud.com/matas/tracks" class="sc-player">Matas Favorites</a>
-
-
+    <div class="post">
+      <h1>Type the URL of a song or the URL of your likes.
+        <br>When you hit GO, it loads in the player.
+      </h1>
+    <form id="searchForm">
+      <input type="text" id="url" placeholder="A track's URL" autofocus />
+    </form>
+    <button onclick="createPlayer()">Go</button>
+      <div class="sc-player">
+        <a href="https://soundcloud.com/lucalush/hands-to-myself"></a>
       </div>
-
-    </div>
-
-    <!-- remote control button -->
-    <div class="footer">
-      <a href="#" class="sc-remote-link">Toggle player</a>
-      2010
     </div>
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -52,7 +29,7 @@
       $.scPlayer.defaults.onDomReady = function() {
         $('a.sc-player, div.sc-player').scPlayer({
           // randomize tracks in a playlist
-          randomize: true
+          randomize: false
         });
       };
     </script>
@@ -83,10 +60,6 @@
           .bind('scPlayer:onMediaEnd', toggleLink)
           .bind('scPlayer:onMediaPause', toggleLink);
       });
-
     </script>
-
-
   </body>
-
  </html>
