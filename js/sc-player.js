@@ -259,10 +259,10 @@
             loadUrl = function(link) {
               var apiUrl = scApiUrl(link.url, apiKey);
               $.getJSON(apiUrl, function(data) {
-                // log('data loaded', link.url, data);
+                log('data loaded', link.url, data);
                 index += 1;
                 if(data.tracks){
-                  // log('data.tracks', data.tracks);
+                  log('data.tracks', data.tracks);
                   playerObj.tracks = playerObj.tracks.concat(data.tracks);
                 }else if(data.duration){
                   // a secret link fix, till the SC API returns permalink with secret on secret response
@@ -309,7 +309,7 @@
       },
       updateTrackInfo = function($player, track) {
         // update the current track info in the player
-        // log('updateTrackInfo', track);
+        log('updateTrackInfo', track);
         $('.sc-info', $player).each(function(index) {
           $('h3', this).html('<a href="' + track.permalink_url +'">' + track.title + '</a>');
           $('h4', this).html('by <a href="' + track.user.permalink_url +'">' + track.user.username + '</a>');
@@ -344,11 +344,11 @@
       play = function(track) {
         var url = track.permalink_url;
         if(currentUrl === url){
-          // log('will play');
+          log('will play');
           audioEngine.play();
         }else{
           currentUrl = url;
-          // log('will load', url);
+          log('will load', url);
           audioEngine.load(track, apiKey);
         }
       },
@@ -515,7 +515,7 @@
         loadTracksData($player, links, opts.apiKey);
         // init the player GUI, when the tracks data was laoded
         $player.bind('onTrackDataLoaded.scPlayer', function(event) {
-          // log('onTrackDataLoaded.scPlayer', event.playerObj, playerId, event.target);
+          log('onTrackDataLoaded.scPlayer', event.playerObj, playerId, event.target);
           var tracks = event.playerObj.tracks;
           if (opts.randomize) {
             tracks = shuffle(tracks);
