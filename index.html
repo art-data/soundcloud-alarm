@@ -95,13 +95,10 @@
         // findThePlayButtonAndClickOnIt()
       }
       var findThePlayButtonAndClickOnIt = function() {
+        // make button clickable on ios
+        $('a.sc-play').css('cursor','pointer')
+
         $('a.sc-play').click()
-        setTimeout(function() {
-          $('a.sc-pause').click()
-        }, 1000)
-        setTimeout(function() {
-          $('a.sc-play').click()
-        }, 2000)
       }
     </script>
   </body>
