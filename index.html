@@ -1,38 +1,99 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Soundcloud Alarm Clock</title>
-</head>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>SDK playground - Streaming</title>
+    <link rel="stylesheet" href="css/sc-player-standard.css" type="text/css">
+    <style media="screen">
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: sans-serif;
+      }
+      input {
+        font-size: 20px;
+      }
+      #info {
+        display: none;
+      }
+      input, p {
+        width: 90%;
+        margin-bottom: 10px;
+        margin-top: 0;
+      }
+      @media (min-width: 500px) {
+        input, p {
+          width: 500px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <form id="timeForm">
+      <input id="date" type="datetime-local">
+    </form>
+    <h2>
+      <br>https://soundcloud.com/yungnoize/i-like-lsd
+      <br>https://soundcloud.com/violet-forest/likes
+    </h2>
+    <form id="searchForm">
+      <input type="text" id="url" placeholder="A track's URL" autofocus />
+    </form>
+    <button onclick="createPlayer()">Go</button>
+    <div id="info">
+      <span id="title"></span>
+      <button id="play">play</button>
+      <button id="pause">pause</button>
+    </div>
 
-<body>
-  <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
-  <script>
-    SC.initialize({
-      client_id: '4e34e0ce2f08f7a3107c9efdd4a61970',
-      redirect_uri: 'http://localhost:8000/callback.html'
-    });
-    console.log('initialize');
+    <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+    <script type="text/javascript" src="js/soundcloud.player.api.js"></script>
+    <script type="text/javascript" src="js/sc-player.js"></script>
 
-    SC.connect().then(function(){
-      debugger
-      console.log('connect');
-      // return SC.put('/me/followings/183');
-      SC.get("/me/favorites", function(tracks){
-        debugger
-        console.log(tracks);
-        alert('lkajdf' + tracks);
-        SC.stream("/tracks/"+tracks[0].id, function(sound){
-          console.log(sound);
-          sound.play();
-        });
-      });
-    }).catch(function(error){
-      debugger
-      alert('Error: ' + error.message);
-    });
-  </script>
-</body>
+    <script type="text/javascript">
+      // // initializing a thing
+      // SC.initialize({
+      //   client_id: '4e34e0ce2f08f7a3107c9efdd4a61970'
+      // });
+
+      // getting some stuff from the html
+      var dateTimeField = document.getElementById('date');
+      var inputField = document.getElementById('url');
+      var title = document.getElementById('title');
+      var info = document.getElementById('info');
+
+      var checkTimePlay = function(){
+        var unadjustedDateFromTheForm = dateTimeField.value
+        var theDateTimeFromTheForm = new Date(unadjustedDateFromTheForm.replace(/-/g,'/').replace('T',' '))
+        console.log("the current time is",
+                    new Date(),
+                    "the datetime from the form is",
+                    theDateTimeFromTheForm,
+                    "is the current datetime less than the time from the form?",
+                    new Date() < theDateTimeFromTheForm)
+        var alarmGoesOff = new Date() > theDateTimeFromTheForm
+        if (alarmGoesOff) {
+          findThePlayButtonAndClickOnIt()
+          console.log('playing the thing')
+        } else {
+          setTimeout(checkTimePlay, 1000)
+          console.log('waiting')
+        }
+      }
+      checkTimePlay()
+
+      // create player when the user clicks submit
+      var createPlayer = function (e) {
+        console.log('creating a player for ' + inputField.value)
+        $('body').append('<a class="sc-player" href=' + inputField.value + ">player</a>")
+        var playerrrr = $('a.sc-player, div.sc-player').scPlayer()
+        // findThePlayButtonAndClickOnIt()
+      }
+      var findThePlayButtonAndClickOnIt = function() {
+        var playButton = $('a.sc-play')
+        playButton.click()
+      }
+    </script>
+  </body>
 </html>
-
-
