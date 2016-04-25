@@ -12,24 +12,25 @@
     <style media="screen">
       body {
         display: block;
-        flex-direction: column;
-        align-items: center;
         font-family: sans-serif;
+        width: 100%;
       }
       input {
-        font-size: 20px;
+        font-size: 12px;
+        width: 100%;
       }
       #info {
         display: none;
       }
       input, p {
+        font-size: 12px;
         width: 90%;
         margin-bottom: 10px;
         margin-top: 0;
       }
       @media (min-width: 500px) {
         input, p {
-          width: 500px;
+          width: 100%;
         }
       }
     </style>
@@ -38,10 +39,8 @@
     <form id="timeForm">
       <input id="date" type="datetime-local">
     </form>
-    <h2>
       <br>https://soundcloud.com/yungnoize/i-like-lsd
       <br>https://soundcloud.com/violet-forest/likes
-    </h2>
     <form id="searchForm">
       <input type="text" id="url" placeholder="A track's URL" autofocus />
     </form>
