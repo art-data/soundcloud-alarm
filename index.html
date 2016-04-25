@@ -54,44 +54,55 @@
     <script type="text/javascript" src="js/sc-player.js"></script>
 
     <script type="text/javascript">
-      // // initializing a thing
-      // SC.initialize({
-      //   client_id: '4e34e0ce2f08f7a3107c9efdd4a61970'
-      // });
+      function checkTimeForm () {
+        var dateTimeField = document.getElementById('date');
+        return convertDateFormValueToAdjustedDate(dateTimeField.value)
+      }
 
-      // getting some stuff from the html
-      var dateTimeField = document.getElementById('date');
-      var inputField = document.getElementById('url');
-      var title = document.getElementById('title');
-      var info = document.getElementById('info');
+      function convertDateFormValueToCurrentTimeZoneDate (d) {
+        console.log("timezoning", d)
+        return new Date(d.replace(/-/g,'/').replace('T',' '))
+      }
 
-      function checkTime () {
-        var unadjustedDateFromTheForm = dateTimeField.value
-        console.log("unadjustedDateFromTheForm", unadjustedDateFromTheForm)
-        var theDateTimeFromTheForm = new Date(unadjustedDateFromTheForm.replace(/-/g,'/').replace('T',' '))
-        console.log("theDateTimeFromTheForm", theDateTimeFromTheForm)
-        var timeLeft = theDateTimeFromTheForm - new Date()
-        return timeLeft
+      function floorDateDownToThePreviousMinute (d) {
+        console.log("flooring", d)
+        return new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes())
+      }
+
+      function convertDateFormValueToAdjustedDate (d) {
+        console.log("converting", d)
+        var timeZoneDate = convertDateFormValueToCurrentTimeZoneDate(d)
+        return floorDateDownToThePreviousMinute(timeZoneDate)
+      }
+
+      function timeUntilDate (d) {
+        return d - new Date()
       }
 
       function checkTimeAndSetTimeout () {
-        console.log("pressed go")
-        var timeLeft = checkTime()
+        var formTime = checkTimeForm()
+        var timeLeft = timeUntilDate(formTime)
         console.log("time left", timeLeft)
-        // setTimeout(createPlayer, timeLeft)
         createPlayer(timeLeft)
         // setTimeout(createPlayer, 0)
+        // ^ this doesn't work, I think the player needs to be created
+        // in the same execution step as some human input
       }
 
       // create player when the user clicks submit
       function createPlayer (timeLeft) {
+        var inputField = document.getElementById('url');
         console.log('creating a player for ' + inputField.value)
+
         $('body').append('<a class="sc-player" href=' + inputField.value + ">player</a>")
-        var playerrrr = $('a.sc-player, div.sc-player').scPlayer()
+        $('a.sc-player, div.sc-player').scPlayer()
+
+        // play it once to get it initialized
         setTimeout(findThePlayButtonAndClickOnIt, 1000)
+        // pause it once it's initialized
         setTimeout(findThePlayButtonAndClickOnIt, 5000)
+        // play it again at the proper alarm clock time
         setTimeout(findThePlayButtonAndClickOnIt, 10000 + timeLeft)
-        // findThePlayButtonAndClickOnIt()
       }
 
       function findThePlayButtonAndClickOnIt () {
