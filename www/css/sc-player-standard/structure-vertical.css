@@ -3,6 +3,7 @@
   height: 540px;
   position: relative;
   margin-bottom: 20px;
+  margin: auto;
 }
 
 .sc-player ol, .sc-player li{
