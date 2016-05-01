@@ -21,6 +21,9 @@
         animation: AnimationName 33s ease infinite;
 
       }
+      button {
+        width: 100%;
+      }
         @-webkit-keyframes AnimationName {
         0%{background-position:0% 25%}
         50%{background-position:100% 76%}
@@ -59,7 +62,7 @@
   <body>
     <form>
       <h2>Soundcloud Alarm Clock</h2>
-      <p>Make sure your phone isn't on silent!!</p>
+      <p>Make sure ur phone isn't on silent!!</p>
       <p>
         <label for="date">what time u tryna get woke?</label>
         <input id="date" type="datetime-local">
@@ -68,8 +71,11 @@
         <label for="user">what soundcloud user's likes u finna hear @that time??</label>
         <input type="text" id="url" placeholder="violet-forest" autofocus />
       </p>
+      <p>
+        <label for="go">when u press go, it'll load the likes and play for a sec, then pause until morning</label>
+        <button id="go" onclick="checkTimeAndSetTimeout()">GO!</button>
+      </p>
     </form>
-    <button onclick="checkTimeAndSetTimeout()">GO!</button>
 
     <div id="putTheSoundCloudPlayerRightHerePlease"></div>
 
