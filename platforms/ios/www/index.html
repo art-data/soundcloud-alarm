@@ -58,10 +58,16 @@
   </head>
   <body>
     <form>
-      <label for="date">what time u tryna get woke?</label>
-      <input id="date" type="datetime-local">
-      <label for="user">what soundcloud user's likes u finna hear @that time??</label>
-      <input type="text" id="url" placeholder="violet-forest" autofocus />
+      <h2>Soundcloud Alarm Clock</h2>
+      <p>Make sure your phone isn't on silent!!</p>
+      <p>
+        <label for="date">what time u tryna get woke?</label>
+        <input id="date" type="datetime-local">
+      </p>
+      <p>
+        <label for="user">what soundcloud user's likes u finna hear @that time??</label>
+        <input type="text" id="url" placeholder="violet-forest" autofocus />
+      </p>
     </form>
     <button onclick="checkTimeAndSetTimeout()">GO!</button>
 
@@ -116,7 +122,8 @@
         console.log('creating a player for ' + urlToPlay)
 
         var soundcloudPlayerContainer = document.getElementById('putTheSoundCloudPlayerRightHerePlease')
-        soundcloudPlayerContainer.innerHTML = "<a class='sc-player' href=" + urlToPlay + ">player</a>"
+        var newlyGeneratedPlayer = "<a class='sc-player' href=" + urlToPlay + ">player</a>"
+        soundcloudPlayerContainer.innerHTML = newlyGeneratedPlayer
         $('a.sc-player, div.sc-player').scPlayer()
 
         // play it once to get it initialized

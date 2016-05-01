@@ -5,8 +5,6 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-
-
     <title>SDK playground - Streaming</title>
     <link rel="stylesheet" href="css/sc-player-standard.css" type="text/css">
     <style media="screen">
@@ -59,20 +57,21 @@
     </style>
   </head>
   <body>
-    <form id="timeForm">
-      <input id="date" type="datetime-local">
-    </form>
-      <br>https://soundcloud.com/yungnoize/i-like-lsd
-      <br>https://soundcloud.com/violet-forest/likes
-    <form id="searchForm">
-      <input type="text" id="url" placeholder="A track's URL" autofocus />
+    <form>
+      <h2>Soundcloud Alarm Clock</h2>
+      <p>Make sure your phone isn't on silent!!</p>
+      <p>
+        <label for="date">what time u tryna get woke?</label>
+        <input id="date" type="datetime-local">
+      </p>
+      <p>
+        <label for="user">what soundcloud user's likes u finna hear @that time??</label>
+        <input type="text" id="url" placeholder="violet-forest" autofocus />
+      </p>
     </form>
     <button onclick="checkTimeAndSetTimeout()">GO!</button>
-    <div id="info">
-      <span id="title"></span>
-      <button id="play">play</button>
-      <button id="pause">pause</button>
-    </div>
+
+    <div id="putTheSoundCloudPlayerRightHerePlease"></div>
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
@@ -119,9 +118,12 @@
       // create player when the user clicks submit
       function createPlayer (timeLeft) {
         var inputField = document.getElementById('url');
-        console.log('creating a player for ' + inputField.value)
+        var urlToPlay = 'https://soundcloud.com/' + inputField.value + '/likes'
+        console.log('creating a player for ' + urlToPlay)
 
-        $('body').append('<a class="sc-player" href=' + inputField.value + ">player</a>")
+        var soundcloudPlayerContainer = document.getElementById('putTheSoundCloudPlayerRightHerePlease')
+        var newlyGeneratedPlayer = "<a class='sc-player' href=" + urlToPlay + ">player</a>"
+        soundcloudPlayerContainer.innerHTML = newlyGeneratedPlayer
         $('a.sc-player, div.sc-player').scPlayer()
 
         // play it once to get it initialized
