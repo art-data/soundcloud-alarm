@@ -1,0 +1,16 @@
+<!-- for iOS -->
+<feature name="Insomnia">
+  <param name="ios-package" value="Insomnia" />
+</feature>
+
+<!-- for Android -->
+<feature name="Insomnia">
+  <param name="android-package" value="nl.xservices.plugins.Insomnia" />
+</feature>
+
+<!-- for wp8 -->
+<feature name="Insomnia">
+  <param name="wp-package" value="Insomnia" />
+</feature>
+
+
