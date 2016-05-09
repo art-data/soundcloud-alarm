@@ -68,12 +68,20 @@
       #go {
         background-color: orange;
         outline: 0;
-        border: 6px solid white;
-        font-size: 32px;
+        border: 0 solid white;
+        font-size: 14px;
+        color: #fff;
+        font-weight: 800;
+        padding: 0.5em 0;
+      }
+      input, select, textarea {
         color: #fff;
       }
+      textarea:focus, input:focus {
+        color: #ff0000;
+      }
       .logo {
-        width: 80%;
+        width: 50%;
         margin: auto;
         display: block;
         padding-top: 1em;
@@ -83,6 +91,9 @@
         text-align: center;
         font-weight: 800;
         color: white;
+      }
+      #url {
+        color: #fff;
       }
     </style>
   </head>
@@ -99,7 +110,6 @@
         <input type="text" id="url" placeholder="violet-forest" autofocus />
       </p>
       <p>
-        <label for="go">when u press go, it'll load the likes and play for a sec, then pause until morning</label>
         <button id="go" onclick="checkTimeAndSetTimeout()">GO!</button>
       </p>
     </form>
