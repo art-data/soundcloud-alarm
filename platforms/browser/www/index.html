@@ -108,8 +108,8 @@
     </style>
   </head>
   <body>
-    <form>
       <img src="img/soundcloud-likes-alarm-clock.png" class="logo">
+      <p id="alerts"></p>
       <p>
         <input id="date" type="datetime-local">
       </p>
@@ -119,7 +119,6 @@
       <p>
         <button id="go" onclick="checkTimeAndSetTimeout()">Go!</button>
       </p>
-    </form>
 
     <div id="putTheSoundCloudPlayerRightHerePlease"></div>
 
@@ -127,6 +126,12 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 
     <script type="text/javascript">
+      window.CLIENT_ID = '4d2526333de7872dbd870ebe98115a5c'
+
+      function showAlert (text) {
+        var alertBox = document.getElementById('alerts')
+        alertBox.innerHTML = text
+      }
       function checkTimeForm () {
         var dateTimeField = document.getElementById('date');
         return convertDateFormValueToAdjustedDate(dateTimeField.value)
@@ -153,33 +158,29 @@
       }
 
       function checkTimeAndSetTimeout () {
-        var formTime = checkTimeForm()
-        var timeLeft = timeUntilDate(formTime)
-        console.log("time left", timeLeft)
-        createPlayer(timeLeft)
-        // setTimeout(createPlayer, 0)
-        // ^ this doesn't work, I think the player needs to be created
-        // in the same execution step as some human input
+        var inputField = document.getElementById('url')
+        var username = inputField.value
+
+        $.get('http://api.soundcloud.com/resolve?url=http://soundcloud.com/' + username + '/likes&client_id=' + CLIENT_ID,
+          function (playlist) {
+            var track = playlist[0]
+            var mp3_url = track.stream_url
+            var formTime = checkTimeForm()
+
+            console.log('trying to set a notification at', formTime)
+            cordova.plugins.notification.local.schedule({
+              id: 1,
+              title: "alarm clolck",
+              text: "something great",
+              at: formTime,
+              sound: mp3_url,
+              icon: "http://icons.com/?cal_id=1"
+            })
+            showAlert('alarm set! playing ' + track.title +
+                      ', by ' + track.user.username)
+          }
+        )
       }
-
-      // create player when the user clicks submit
-      function createPlayer (timeLeft) {
-        var inputField = document.getElementById('url');
-
-        // get mp3 url
-
-        // play it at the proper alarm clock time
-
-        setTimeout(playTrack, 10000 + timeLeft)
-      }
-
-      function playTrack () {
-        console.log('clicking play')
-        // code here
-      }
-    </script>
-    <script type="text/javascript">
-      app.initialize();
     </script>
   </body>
 </html>

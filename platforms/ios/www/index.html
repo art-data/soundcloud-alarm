@@ -158,17 +158,6 @@
       }
 
       function checkTimeAndSetTimeout () {
-        var formTime = checkTimeForm()
-        var timeLeft = timeUntilDate(formTime)
-        console.log("time left", timeLeft)
-        createPlayer(timeLeft)
-        // setTimeout(createPlayer, 0)
-        // ^ this doesn't work, I think the player needs to be created
-        // in the same execution step as some human input
-      }
-
-      // create player when the user clicks submit
-      function createPlayer (timeLeft) {
         var inputField = document.getElementById('url')
         var username = inputField.value
 
@@ -176,12 +165,23 @@
           function (playlist) {
             var track = playlist[0]
             var mp3_url = track.stream_url
-            setTimeout(playTrack, 10000 + timeLeft, mp3_url)
+            var formTime = checkTimeForm()
+            cordova.plugins.notification.local.schedule({
+              id: 1,
+              title: "alarm clolck",
+              text: "something great",
+              at: formTime,
+              sound: mp3_url,
+              icon: "http://icons.com/?cal_id=1"
+            })
             showAlert('alarm set! playing ' + track.title +
-                      ', by ' + track.user.username +
-                      ' in ' + timeLeft / 1000 / 60 / 60 + ' hours')
+                      ', by ' + track.user.username)
           }
         )
+      }
+
+      // create player when the user clicks submit
+      function createPlayer (timeLeft) {
 
         // play it at the proper alarm clock time
 
