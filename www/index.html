@@ -108,8 +108,8 @@
     </style>
   </head>
   <body>
-    <form>
       <img src="img/soundcloud-likes-alarm-clock.png" class="logo">
+      <p id="alerts"></p>
       <p>
         <input id="date" type="datetime-local">
       </p>
@@ -119,17 +119,19 @@
       <p>
         <button id="go" onclick="checkTimeAndSetTimeout()">Go!</button>
       </p>
-    </form>
 
     <div id="putTheSoundCloudPlayerRightHerePlease"></div>
 
-    <script type="text/javascript" src="cordova.js"></script>
+    <!-- <script type="text/javascript" src="cordova.js"></script> -->
     <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-    <script type="text/javascript" src="js/soundcloud.player.api.js"></script>
-    <script type="text/javascript" src="js/sc-player.js"></script>
-    <script type="text/javascript" src="js/Insomnia.js"></script>
 
     <script type="text/javascript">
+      window.CLIENT_ID = '4d2526333de7872dbd870ebe98115a5c'
+
+      function showAlert (text) {
+        var alertBox = document.getElementById('alerts')
+        alertBox.innerHTML = text
+      }
       function checkTimeForm () {
         var dateTimeField = document.getElementById('date');
         return convertDateFormValueToAdjustedDate(dateTimeField.value)
@@ -167,22 +169,39 @@
 
       // create player when the user clicks submit
       function createPlayer (timeLeft) {
-        var inputField = document.getElementById('url');
+        var inputField = document.getElementById('url')
+        var username = inputField.value
 
-        // get mp3 url
+        $.get('http://api.soundcloud.com/resolve?url=http://soundcloud.com/' + username + '/likes&client_id=' + CLIENT_ID,
+          function (playlist) {
+            var track = playlist[0]
+            var mp3_url = track.stream_url
+            setTimeout(playTrack, 10000 + timeLeft, mp3_url)
+            showAlert('alarm set! playing ' + track.title +
+                      ', by ' + track.user.username +
+                      ' in ' + timeLeft / 1000 / 60 / 60 + ' hours')
+          }
+        )
 
         // play it at the proper alarm clock time
 
-        setTimeout(playTrack, 10000 + timeLeft)
       }
 
-      function playTrack () {
-        console.log('clicking play')
+      function playTrack (mp3_url) {
+        console.log('playing track')
         // code here
+        var context = new webkitAudioContext(),
+            audio = new Audio(),
+            source,
+            // `stream_url` you'd get from
+            // requesting http://api.soundcloud.com/tracks/6981096.json
+            url = mp3_url + '?client_id=' + CLIENT_ID;
+        audio.crossOrigin = "anonymous"; // via http://stackoverflow.com/questions/31308679/mediaelementaudiosource-outputs-zeros-due-to-cors-access-restrictions-local-mp3
+        audio.src = url;
+        source = context.createMediaElementSource(audio);
+        source.connect(context.destination);
+        source.mediaElement.play();
       }
-    </script>
-    <script type="text/javascript">
-      app.initialize();
     </script>
   </body>
 </html>
