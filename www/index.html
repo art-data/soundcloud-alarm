@@ -168,28 +168,17 @@
       // create player when the user clicks submit
       function createPlayer (timeLeft) {
         var inputField = document.getElementById('url');
-        var urlToPlay = 'https://soundcloud.com/' + inputField.value + '/likes'
-        console.log('creating a player for ' + urlToPlay)
 
-        var soundcloudPlayerContainer = document.getElementById('putTheSoundCloudPlayerRightHerePlease')
-        var newlyGeneratedPlayer = "<a class='sc-player' href=" + urlToPlay + ">player</a>"
-        soundcloudPlayerContainer.innerHTML = newlyGeneratedPlayer
-        $('a.sc-player, div.sc-player').scPlayer()
+        // get mp3 url
 
-        // play it once to get it initialized
-        setTimeout(findThePlayButtonAndClickOnIt, 1000)
-        // pause it once it's initialized
-        setTimeout(findThePlayButtonAndClickOnIt, 5000)
-        // play it again at the proper alarm clock time
-        setTimeout(findThePlayButtonAndClickOnIt, 10000 + timeLeft)
+        // play it at the proper alarm clock time
+
+        setTimeout(playTrack, 10000 + timeLeft)
       }
 
-      function findThePlayButtonAndClickOnIt () {
+      function playTrack () {
         console.log('clicking play')
-        // make button clickable on ios
-        $('a.sc-play').css('cursor','pointer')
-
-        $('a.sc-play').trigger('click')
+        // code here
       }
     </script>
     <script type="text/javascript">

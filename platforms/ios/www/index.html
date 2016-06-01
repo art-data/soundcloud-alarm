@@ -13,7 +13,7 @@
     }
       body {
         /*display: block;*/
-        font-family: sans-serif;
+        font-family: "Lucida Grande", sans-serif;
         width: 320px;
         margin: 0 auto;
         padding: 10px;
@@ -42,30 +42,82 @@
         100%{background-position:0% 25%}
       }
       input, p, button {
-        font-size: 12px;
-        /*width: 90%;*/
         width: 100%;
+      }
+      p {
+        font-size: 14px;
+        color: #fff;
+        text-align: center;
+        margin: auto;
+        padding: 0.6em 0;
+      }
+      input {
+        font-family: "Lucida Grande";
+        border: 0 solid #f50;
+        margin: 1em auto;
+        background: #e5e5e5;
+        color: #666;
+        border-radius: 3px;
+        -webkit-appearance: none;
+        -webkit-border-radius: 0;
+        border-radius: 4px;
+        width: 200px;
+        display: block;
+        margin: 2em auto;
+        height: 40px;
+        padding-left: 15px;
+        line-height: 20px;
       }
       #info {
         display: none;
+      }
+      #go {
+        background-color: transparent;
+        outline: 0;
+        border: 1px solid white;
+        font-size: 14px;
+        color: #fff;
+        font-weight: 800;
+        padding: 1.5em 0;
+        border-radius: 4px;
+        width: 280px;
+      }
+      textarea:focus, input:focus {
+        color: #666;
+        background-color: #e5e5e5;
+        height: 40px;
+        line-height: 20px;
+      }
+      .logo {
+        width: 75%;
+        margin: auto;
+        display: block;
+        padding: 1em 0;
+      }
+      h2 {
+        font-size: 22px;
+        text-align: center;
+        font-weight: 800;
+        color: white;
+      }
+      #url {
+        -webkit-text-fill-color: #666;
+        color: #666;
+        height: 40px;
       }
     </style>
   </head>
   <body>
     <form>
-      <h2>Soundcloud Alarm Clock</h2>
-      <p>Make sure ur phone isn't on silent!!</p>
+      <img src="img/soundcloud-likes-alarm-clock.png" class="logo">
       <p>
-        <label for="date">what time u tryna get woke?</label>
         <input id="date" type="datetime-local">
       </p>
       <p>
-        <label for="user">what soundcloud user's likes u finna hear @that time??</label>
-        <input type="text" id="url" placeholder="violet-forest" autofocus />
+        <input type="text" id="url" placeholder="Enter Soundcloud Username" autofocus />
       </p>
       <p>
-        <label for="go">when u press go, it'll load the likes and play for a sec, then pause until morning</label>
-        <button id="go" onclick="checkTimeAndSetTimeout()">GO!</button>
+        <button id="go" onclick="checkTimeAndSetTimeout()">Go!</button>
       </p>
     </form>
 
@@ -116,28 +168,17 @@
       // create player when the user clicks submit
       function createPlayer (timeLeft) {
         var inputField = document.getElementById('url');
-        var urlToPlay = 'https://soundcloud.com/' + inputField.value + '/likes'
-        console.log('creating a player for ' + urlToPlay)
 
-        var soundcloudPlayerContainer = document.getElementById('putTheSoundCloudPlayerRightHerePlease')
-        var newlyGeneratedPlayer = "<a class='sc-player' href=" + urlToPlay + ">player</a>"
-        soundcloudPlayerContainer.innerHTML = newlyGeneratedPlayer
-        $('a.sc-player, div.sc-player').scPlayer()
+        // get mp3 url
 
-        // play it once to get it initialized
-        setTimeout(findThePlayButtonAndClickOnIt, 1000)
-        // pause it once it's initialized
-        setTimeout(findThePlayButtonAndClickOnIt, 5000)
-        // play it again at the proper alarm clock time
-        setTimeout(findThePlayButtonAndClickOnIt, 10000 + timeLeft)
+        // play it at the proper alarm clock time
+
+        setTimeout(playTrack, 10000 + timeLeft)
       }
 
-      function findThePlayButtonAndClickOnIt () {
+      function playTrack () {
         console.log('clicking play')
-        // make button clickable on ios
-        $('a.sc-play').css('cursor','pointer')
-
-        $('a.sc-play').trigger('click')
+        // code here
       }
     </script>
     <script type="text/javascript">
