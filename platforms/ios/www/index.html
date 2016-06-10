@@ -166,6 +166,8 @@
             var track = playlist[0]
             var mp3_url = track.stream_url
             var formTime = checkTimeForm()
+
+            console.log('trying to set a notification at', formTime)
             cordova.plugins.notification.local.schedule({
               id: 1,
               title: "alarm clolck",
@@ -178,29 +180,6 @@
                       ', by ' + track.user.username)
           }
         )
-      }
-
-      // create player when the user clicks submit
-      function createPlayer (timeLeft) {
-
-        // play it at the proper alarm clock time
-
-      }
-
-      function playTrack (mp3_url) {
-        console.log('playing track')
-        // code here
-        var context = new webkitAudioContext(),
-            audio = new Audio(),
-            source,
-            // `stream_url` you'd get from
-            // requesting http://api.soundcloud.com/tracks/6981096.json
-            url = mp3_url + '?client_id=' + CLIENT_ID;
-        audio.crossOrigin = "anonymous"; // via http://stackoverflow.com/questions/31308679/mediaelementaudiosource-outputs-zeros-due-to-cors-access-restrictions-local-mp3
-        audio.src = url;
-        source = context.createMediaElementSource(audio);
-        source.connect(context.destination);
-        source.mediaElement.play();
       }
     </script>
   </body>
