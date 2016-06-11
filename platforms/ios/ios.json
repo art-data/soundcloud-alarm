@@ -9,10 +9,6 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"Insomnia\"><param name=\"ios-package\" value=\"Insomnia\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
                         },
@@ -36,9 +32,6 @@
         }
     },
     "installed_plugins": {
-        "cordova-plugin-insomnia": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
-        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
         },
@@ -48,14 +41,6 @@
     },
     "dependent_plugins": {},
     "modules": [
-        {
-            "file": "plugins/cordova-plugin-insomnia/www/Insomnia.js",
-            "id": "cordova-plugin-insomnia.Insomnia",
-            "pluginId": "cordova-plugin-insomnia",
-            "clobbers": [
-                "window.plugins.insomnia"
-            ]
-        },
         {
             "file": "plugins/cordova-plugin-device/www/device.js",
             "id": "cordova-plugin-device.device",
@@ -75,7 +60,6 @@
         }
     ],
     "plugin_metadata": {
-        "cordova-plugin-insomnia": "4.2.0",
         "cordova-plugin-device": "1.1.2",
         "cordova-plugin-background-mode": "0.6.5"
     }

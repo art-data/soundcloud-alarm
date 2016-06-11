@@ -12,7 +12,8 @@
     <script>
       function clickEvent(){
         checkTimeAndSetTimeout();
-        window.plugins.insomnia.keepAwake();
+        // window.plugins.insomnia.keepAwake();
+        cordova.plugins.backgroundMode.enable();
       }
     </script>
     <title>SDK playground - Streaming</title>

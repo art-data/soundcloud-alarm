@@ -21,9 +21,6 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
-        "cordova-plugin-insomnia": {
-            "PACKAGE_NAME": "com.phonegap.helloworld"
-        },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.phonegap.helloworld"
         },
@@ -33,14 +30,6 @@
     },
     "dependent_plugins": {},
     "modules": [
-        {
-            "file": "plugins/cordova-plugin-insomnia/www/Insomnia.js",
-            "id": "cordova-plugin-insomnia.Insomnia",
-            "pluginId": "cordova-plugin-insomnia",
-            "clobbers": [
-                "window.plugins.insomnia"
-            ]
-        },
         {
             "file": "plugins/cordova-plugin-device/www/device.js",
             "id": "cordova-plugin-device.device",
@@ -67,7 +56,6 @@
     ],
     "plugin_metadata": {
         "cordova-plugin-whitelist": "1.2.1",
-        "cordova-plugin-insomnia": "4.2.0",
         "cordova-plugin-device": "1.1.2",
         "cordova-plugin-background-mode": "0.6.5"
     }
