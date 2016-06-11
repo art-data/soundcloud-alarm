@@ -126,7 +126,7 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 
     <script type="text/javascript">
-      window.CLIENT_ID = '4d2526333de7872dbd870ebe98115a5c'
+      window.CLIENT_ID = '4e34e0ce2f08f7a3107c9efdd4a61970'
 
       function showAlert (text) {
         var alertBox = document.getElementById('alerts')
@@ -178,6 +178,7 @@
                   sPath + filename,
                   callback,
                   function (error) {
+                    debugger
                     console.log("download error source " + error.source)
                     console.log("download error target " + error.target)
                     console.log("upload error code: " + error.code)
@@ -196,9 +197,9 @@
         $.get('http://api.soundcloud.com/resolve?url=http://soundcloud.com/' + username + '/likes&client_id=' + CLIENT_ID,
           function (playlist) {
             var track = playlist[0]
-            var mp3_url = track.stream_url + '&client_id=' + CLIENT_ID
+            var mp3_url = track.stream_url + '?client_id=' + CLIENT_ID
             var formTime = checkTimeForm()
-            console.log(mp3_url)
+            console.log('mp3 url is: ', mp3_url)
 
             downloadFile(mp3_url, "mp3.mp3", function (theFile) {
               var local_mp3_url = theFile.toURI()
