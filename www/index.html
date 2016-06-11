@@ -196,7 +196,7 @@
         $.get('http://api.soundcloud.com/resolve?url=http://soundcloud.com/' + username + '/likes&client_id=' + CLIENT_ID,
           function (playlist) {
             var track = playlist[0]
-            var mp3_url = track.stream_url + '&client_id=' + CLIENT_ID
+            var mp3_url = track.stream_url + '?client_id=' + CLIENT_ID
             var formTime = checkTimeForm()
             console.log('mp3 url is: ', mp3_url)
 
