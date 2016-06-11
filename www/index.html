@@ -157,6 +157,11 @@
         return d - new Date()
       }
 
+      var fail = function (error) {
+        console.log(error.code);
+      };
+
+
       function downloadFile (url, filename, callback) {
         window.requestFileSystem(
           LocalFileSystem.PERSISTENT, 0,
