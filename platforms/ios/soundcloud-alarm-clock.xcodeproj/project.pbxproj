@@ -13,6 +13,9 @@
 		302D95F114D2391D003F00A1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302D95EF14D2391D003F00A1 /* MainViewController.m */; };
 		302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 302D95F014D2391D003F00A1 /* MainViewController.xib */; };
 		AF07131F2A8D46B3BDE99DEA /* Insomnia.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DC399975AF4122B5658B2F /* Insomnia.m */; };
+		D6A27F2A603745FE869136EA /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = AE37F961CE564F0BA2EA2283 /* CDVDevice.m */; };
+		2D620AC7CA3842D3A2F0C7A9 /* APPBackgroundMode.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF15D85A4FF4E2DBD4C89A7 /* APPBackgroundMode.m */; };
+		35A7F33E5FAA4D388AD73219 /* appbeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 00F56F061E3941989399486C /* appbeep.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,11 @@
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = "soundcloud-alarm-clock/config.xml"; sourceTree = "<group>"; };
+		AE37F961CE564F0BA2EA2283 /* CDVDevice.m */ = {isa = PBXFileReference; name = "CDVDevice.m"; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		CC89BA3EAAC94F50A9DDBB27 /* CDVDevice.h */ = {isa = PBXFileReference; name = "CDVDevice.h"; path = "cordova-plugin-device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		DAF15D85A4FF4E2DBD4C89A7 /* APPBackgroundMode.m */ = {isa = PBXFileReference; name = "APPBackgroundMode.m"; path = "cordova-plugin-background-mode/APPBackgroundMode.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		4791D0CC6DE04428A1BD05EF /* APPBackgroundMode.h */ = {isa = PBXFileReference; name = "APPBackgroundMode.h"; path = "cordova-plugin-background-mode/APPBackgroundMode.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		00F56F061E3941989399486C /* appbeep.wav */ = {isa = PBXFileReference; name = "appbeep.wav"; path = "appbeep.wav"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +131,7 @@
 				0207DA571B56EA530066E2B4 /* Images.xcassets */,
 				3047A50E1AB8057F00498E2A /* config */,
 				8D1107310486CEB800E47090 /* soundcloud-alarm-clock-Info.plist */,
+				00F56F061E3941989399486C /* appbeep.wav */,
 			);
 			name = Resources;
 			path = "soundcloud-alarm-clock/Resources";
@@ -158,6 +167,10 @@
 			children = (
 				A3DC399975AF4122B5658B2F /* Insomnia.m */,
 				0CCAD7091883416DBAE9836F /* Insomnia.h */,
+				AE37F961CE564F0BA2EA2283 /* CDVDevice.m */,
+				CC89BA3EAAC94F50A9DDBB27 /* CDVDevice.h */,
+				DAF15D85A4FF4E2DBD4C89A7 /* APPBackgroundMode.m */,
+				4791D0CC6DE04428A1BD05EF /* APPBackgroundMode.h */,
 			);
 			name = Plugins;
 			path = "soundcloud-alarm-clock/Plugins";
@@ -241,6 +254,7 @@
 			files = (
 				302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */,
 				0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */,
+				35A7F33E5FAA4D388AD73219 /* appbeep.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +287,8 @@
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				AF07131F2A8D46B3BDE99DEA /* Insomnia.m in Sources */,
+				D6A27F2A603745FE869136EA /* CDVDevice.m in Sources */,
+				2D620AC7CA3842D3A2F0C7A9 /* APPBackgroundMode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
