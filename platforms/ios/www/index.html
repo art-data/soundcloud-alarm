@@ -169,13 +169,13 @@
             fileSystem.root.getFile(
               "dummy.html", {create: true, exclusive: false},
               function gotFileEntry (fileEntry) {
-                var sPath = fileEntry.fullPath.replace("dummy.html","")
+                var sPath = 'cdvfile://localhost/persistent/' + filename
                 var fileTransfer = new FileTransfer()
                 fileEntry.remove()
 
                 fileTransfer.download(
                   url,
-                  sPath + filename,
+                  sPath,
                   callback,
                   function (error) {
                     debugger
