@@ -121,20 +121,20 @@
         $('body').append("<a class='sc-player' href=" + urlToPlay + ">player</a>")
         $('a.sc-player, div.sc-player').scPlayer()
 
-        // play it once to get it initialized
-        setTimeout(findThePlayButtonAndClickOnIt, 1000)
-        // pause it once it's initialized
-        setTimeout(findThePlayButtonAndClickOnIt, 5000)
-        // play it again at the proper alarm clock time
+        // // play it once to get it initialized
+        // setTimeout(findThePlayButtonAndClickOnIt, 1000)
+        // // pause it once it's initialized
+        // setTimeout(findThePlayButtonAndClickOnIt, 5000)
+        // // play it again at the proper alarm clock time
         setTimeout(findThePlayButtonAndClickOnIt, 10000 + timeLeft)
       }
 
       function findThePlayButtonAndClickOnIt () {
-        console.log('clicking play')
-        // make button clickable on ios
-        $('a.sc-play').css('cursor','pointer')
+        // console.log('clicking play')
+        // // make button clickable on ios
+        // $('li.active').css('cursor','pointer')
 
-        $('a.sc-play').trigger('click')
+        $('li.active').trigger('click')
       }
     </script>
     <script type="text/javascript">
