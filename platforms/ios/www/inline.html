@@ -7,7 +7,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>My App</title>
     <!-- Path to Framework7 Library CSS-->
-    <link rel="stylesheet" href="css/sc-player-standard.css" type="text/css">
     <link rel="stylesheet" href="css/framework7.ios.min.css">
     <!-- Path to your custom app styles-->
     <link rel="stylesheet" href="css/my-app.css">
@@ -69,13 +68,7 @@
               <div class="content-block">
                 <div class="content-block-inner">
                   <p>Couple of worlds here because my app is so awesome!</p>
-                  <form>
-                    <label for="date">what time u tryna get woke?</label>
-                    <input id="date" type="datetime-local">
-                    <label for="user">what soundcloud user's likes u finna hear @that time??</label>
-                    <input type="text" id="url" placeholder="violet-forest" autofocus />
-                  </form>
-                  <button onclick="clickEvent();">GO!</button>
+                  <p>Duis sed erat ac eros ultrices pharetra id ut tellus. Praesent rhoncus enim ornare ipsum aliquet ultricies. Pellentesque sodales erat quis elementum sagittis.</p>
                 </div>
               </div>
               <div class="content-block-title">What about simple navigation?</div>
@@ -116,8 +109,7 @@
               <div class="content-block">
               <div class="page-content">
                 <p>You may go <a href="#" class="back">back</a> or load <a href="#services">Services</a> page.</p>
-                <div class="sc-player-container">
-                </div>
+                  <div id="sc-player-container"></div>
               </div>
               </div>
             </div>
@@ -356,11 +348,9 @@
       </div>
     </div>
     <!-- Path to Framework7 Library JS-->
-    <script src="https://code.jquery.com/jquery-3.0.0.min.js" onload="console.log('loadeddd')"></script>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/soundcloud.player.api.js"></script>
     <script type="text/javascript" src="js/sc-player.js"></script>
-    <script type="text/javascript" src="js/alarm.js"></script>
     <script type="text/javascript" src="js/framework7.min.js"></script>
     <!-- Path to your app js-->
     <script type="text/javascript" src="js/my-app.js"></script>

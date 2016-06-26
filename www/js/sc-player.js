@@ -10,6 +10,7 @@
 *   The link will be automatically replaced by the HTML based player
 */
 (function($) {
+  console.log('loaded')
   // Convert milliseconds into Hours (h), Minutes (m), and Seconds (s)
   var timecode = function(ms) {
     var hms = function(ms) {
