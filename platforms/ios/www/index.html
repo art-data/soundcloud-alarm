@@ -5,23 +5,18 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-    <script type="text/javascript" src="js/soundcloud.player.api.js"></script>
-    <script type="text/javascript" src="js/sc-player.js"></script>
-    <script>
-      function clickEvent(){
-        checkTimeAndSetTimeout();
-        cordova.plugins.backgroundMode.enable();
-      }
-    </script>
     <title>SDK playground - Streaming</title>
     <link rel="stylesheet" href="css/sc-player-standard.css" type="text/css">
     <style media="screen">
+    html {
+      width: 100%;
+    }
       body {
-        display: block;
-        font-family: sans-serif;
-        width: 100%;
+        /*display: block;*/
+        font-family: "Lucida Grande", sans-serif;
+        width: 320px;
+        margin: 0 auto;
+        padding: 10px;
 
         background: linear-gradient(67deg, #f0641b, #ffeb0e, #f01b7b, #fed511, #fe6211, #ffca51);
         background-size: 1200% 1200%;
@@ -31,7 +26,7 @@
         animation: AnimationName 33s ease infinite;
 
       }
-        @-webkit-keyframes AnimationName {
+      @-webkit-keyframes AnimationName {
         0%{background-position:0% 25%}
         50%{background-position:100% 76%}
         100%{background-position:0% 25%}
@@ -46,37 +41,97 @@
         50%{background-position:100% 76%}
         100%{background-position:0% 25%}
       }
-      input {
-        font-size: 12px;
+      input, p, button {
         width: 100%;
+      }
+      p {
+        font-size: 14px;
+        color: #fff;
+        text-align: center;
+        margin: auto;
+        padding: 0.6em 0;
+      }
+      input {
+        font-family: "Lucida Grande";
+        border: 0 solid #f50;
+        margin: 1em auto;
+        background: #e5e5e5;
+        color: #666;
+        border-radius: 3px;
+        -webkit-appearance: none;
+        -webkit-border-radius: 0;
+        border-radius: 4px;
+        width: 200px;
+        display: block;
+        margin: 2em auto;
+        height: 40px;
+        padding-left: 15px;
+        line-height: 20px;
       }
       #info {
         display: none;
       }
-      input, p {
-        font-size: 12px;
-        width: 90%;
-        margin-bottom: 10px;
-        margin-top: 0;
+      #go {
+        background-color: transparent;
+        outline: 0;
+        border: 1px solid white;
+        font-size: 14px;
+        color: #fff;
+        font-weight: 800;
+        padding: 1.5em 0;
+        border-radius: 4px;
+        width: 280px;
       }
-      @media (min-width: 500px) {
-        input, p {
-        width: 100%;
-        }
+      textarea:focus, input:focus {
+        color: #666;
+        background-color: #e5e5e5;
+        height: 40px;
+        line-height: 20px;
+      }
+      .logo {
+        width: 75%;
+        margin: auto;
+        display: block;
+        padding: 1em 0;
+      }
+      h2 {
+        font-size: 22px;
+        text-align: center;
+        font-weight: 800;
+        color: white;
+      }
+      #url {
+        -webkit-text-fill-color: #666;
+        color: #666;
+        height: 40px;
       }
     </style>
   </head>
   <body>
-    <form>
-      <label for="date">what time u tryna get woke?</label>
-      <input id="date" type="datetime-local">
-      <label for="user">what soundcloud user's likes u finna hear @that time??</label>
-      <input type="text" id="url" placeholder="violet-forest" autofocus />
-    </form>
-    <button onclick="clickEvent();">GO!</button>
+      <img src="img/soundcloud-likes-alarm-clock.png" class="logo">
+      <p id="alerts"></p>
+      <p>
+        <input id="date" type="datetime-local">
+      </p>
+      <p>
+        <input type="text" id="url" placeholder="Enter Soundcloud Username" autofocus />
+      </p>
+      <p>
+        <button id="go" onclick="checkTimeAndSetTimeout()">Go!</button>
+      </p>
+
+    <div id="putTheSoundCloudPlayerRightHerePlease"></div>
+
+    <!-- <script type="text/javascript" src="cordova.js"></script> -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 
     <script type="text/javascript">
+      window.CLIENT_ID = '4d2526333de7872dbd870ebe98115a5c'
 
+      function showAlert (text) {
+        var alertBox = document.getElementById('alerts')
+        alertBox.innerHTML = text
+      }
       function checkTimeForm () {
         var dateTimeField = document.getElementById('date');
         return convertDateFormValueToAdjustedDate(dateTimeField.value)
@@ -114,31 +169,39 @@
 
       // create player when the user clicks submit
       function createPlayer (timeLeft) {
-        var inputField = document.getElementById('url');
-        var urlToPlay = 'https://soundcloud.com/' + inputField.value + '/likes'
-        console.log('creating a player for ' + urlToPlay)
+        var inputField = document.getElementById('url')
+        var username = inputField.value
 
-        $('body').append("<a class='sc-player' href=" + urlToPlay + ">player</a>")
-        $('a.sc-player, div.sc-player').scPlayer()
+        $.get('http://api.soundcloud.com/resolve?url=http://soundcloud.com/' + username + '/likes&client_id=' + CLIENT_ID,
+          function (playlist) {
+            var track = playlist[0]
+            var mp3_url = track.stream_url
+            setTimeout(playTrack, 10000 + timeLeft, mp3_url)
+            showAlert('alarm set! playing ' + track.title +
+                      ', by ' + track.user.username +
+                      ' in ' + timeLeft / 1000 / 60 / 60 + ' hours')
+          }
+        )
 
-        // play it once to get it initialized
-        setTimeout(findThePlayButtonAndClickOnIt, 1000)
-        // pause it once it's initialized
-        setTimeout(findThePlayButtonAndClickOnIt, 5000)
-        // play it again at the proper alarm clock time
-        setTimeout(findThePlayButtonAndClickOnIt, 10000 + timeLeft)
+        // play it at the proper alarm clock time
+
       }
 
-      function findThePlayButtonAndClickOnIt () {
-        console.log('clicking play')
-        // make button clickable on ios
-        $('a.sc-play').css('cursor','pointer')
-
-        $('a.sc-play').trigger('click')
+      function playTrack (mp3_url) {
+        console.log('playing track')
+        // code here
+        var context = new webkitAudioContext(),
+            audio = new Audio(),
+            source,
+            // `stream_url` you'd get from
+            // requesting http://api.soundcloud.com/tracks/6981096.json
+            url = mp3_url + '?client_id=' + CLIENT_ID;
+        audio.crossOrigin = "anonymous"; // via http://stackoverflow.com/questions/31308679/mediaelementaudiosource-outputs-zeros-due-to-cors-access-restrictions-local-mp3
+        audio.src = url;
+        source = context.createMediaElementSource(audio);
+        source.connect(context.destination);
+        source.mediaElement.play();
       }
-    </script>
-    <script type="text/javascript">
-      app.initialize();
     </script>
   </body>
 </html>
