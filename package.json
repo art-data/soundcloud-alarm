@@ -1,0 +1,17 @@
+{
+    "name": "com.phonegap.helloworld",
+    "version": "1.0.0",
+    "displayName": "soundcloud-alarm-clock",
+    "cordova": {
+        "platforms": [
+            "ios"
+        ],
+        "plugins": {
+            "cordova-plugin-whitelist": {}
+        }
+    },
+    "dependencies": {
+        "cordova-ios": "~4.1.1",
+        "cordova-plugin-whitelist": "1.1.0"
+    }
+}

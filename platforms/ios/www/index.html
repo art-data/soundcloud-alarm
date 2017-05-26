@@ -6,202 +6,21 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     <title>SDK playground - Streaming</title>
-    <link rel="stylesheet" href="css/sc-player-standard.css" type="text/css">
-    <style media="screen">
-    html {
-      width: 100%;
-    }
-      body {
-        /*display: block;*/
-        font-family: "Lucida Grande", sans-serif;
-        width: 320px;
-        margin: 0 auto;
-        padding: 10px;
-
-        background: linear-gradient(67deg, #f0641b, #ffeb0e, #f01b7b, #fed511, #fe6211, #ffca51);
-        background-size: 1200% 1200%;
-
-        -webkit-animation: AnimationName 33s ease infinite;
-        -moz-animation: AnimationName 33s ease infinite;
-        animation: AnimationName 33s ease infinite;
-
-      }
-      @-webkit-keyframes AnimationName {
-        0%{background-position:0% 25%}
-        50%{background-position:100% 76%}
-        100%{background-position:0% 25%}
-      }
-      @-moz-keyframes AnimationName {
-        0%{background-position:0% 25%}
-        50%{background-position:100% 76%}
-        100%{background-position:0% 25%}
-      }
-      @keyframes AnimationName {
-        0%{background-position:0% 25%}
-        50%{background-position:100% 76%}
-        100%{background-position:0% 25%}
-      }
-      input, p, button {
-        width: 100%;
-      }
-      p {
-        font-size: 14px;
-        color: #fff;
-        text-align: center;
-        margin: auto;
-        padding: 0.6em 0;
-      }
-      input {
-        font-family: "Lucida Grande";
-        border: 0 solid #f50;
-        margin: 1em auto;
-        background: #e5e5e5;
-        color: #666;
-        border-radius: 3px;
-        -webkit-appearance: none;
-        -webkit-border-radius: 0;
-        border-radius: 4px;
-        width: 200px;
-        display: block;
-        margin: 2em auto;
-        height: 40px;
-        padding-left: 15px;
-        line-height: 20px;
-      }
-      #info {
-        display: none;
-      }
-      #go {
-        background-color: transparent;
-        outline: 0;
-        border: 1px solid white;
-        font-size: 14px;
-        color: #fff;
-        font-weight: 800;
-        padding: 1.5em 0;
-        border-radius: 4px;
-        width: 280px;
-      }
-      textarea:focus, input:focus {
-        color: #666;
-        background-color: #e5e5e5;
-        height: 40px;
-        line-height: 20px;
-      }
-      .logo {
-        width: 75%;
-        margin: auto;
-        display: block;
-        padding: 1em 0;
-      }
-      h2 {
-        font-size: 22px;
-        text-align: center;
-        font-weight: 800;
-        color: white;
-      }
-      #url {
-        -webkit-text-fill-color: #666;
-        color: #666;
-        height: 40px;
-      }
-    </style>
+    <link rel="stylesheet" href="css/index.css" type="text/css">
   </head>
   <body>
-      <img src="img/soundcloud-likes-alarm-clock.png" class="logo">
-      <p id="alerts"></p>
-      <p>
-        <input id="date" type="datetime-local">
-      </p>
-      <p>
-        <input type="text" id="url" placeholder="Enter Soundcloud Username" autofocus />
-      </p>
-      <p>
-        <button id="go" onclick="checkTimeAndSetTimeout()">Go!</button>
-      </p>
+      <div class="secondary">
+        <p id="alerts"></p>
+        <p><input id="date" type="datetime-local"></p>
+        <p><input type="text" id="url" placeholder="Soundcloud Username" autofocus /></p>
+        <p><button id="go" onclick="checkTimeAndSetTimeout()">Go!</button></p>
+      </div>
+      <div id="putTheSoundCloudPlayerRightHerePlease"></div>
 
-    <div id="putTheSoundCloudPlayerRightHerePlease"></div>
-
-    <!-- <script type="text/javascript" src="cordova.js"></script> -->
     <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 
-    <script type="text/javascript">
-      window.CLIENT_ID = '4d2526333de7872dbd870ebe98115a5c'
 
-      function showAlert (text) {
-        var alertBox = document.getElementById('alerts')
-        alertBox.innerHTML = text
-      }
-      function checkTimeForm () {
-        var dateTimeField = document.getElementById('date');
-        return convertDateFormValueToAdjustedDate(dateTimeField.value)
-      }
-
-      function convertDateFormValueToCurrentTimeZoneDate (d) {
-        console.log("timezoning", d)
-        return new Date(d.replace(/-/g,'/').replace('T',' '))
-      }
-
-      function floorDateDownToThePreviousMinute (d) {
-        console.log("flooring", d)
-        return new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes())
-      }
-
-      function convertDateFormValueToAdjustedDate (d) {
-        console.log("converting", d)
-        var timeZoneDate = convertDateFormValueToCurrentTimeZoneDate(d)
-        return floorDateDownToThePreviousMinute(timeZoneDate)
-      }
-
-      function timeUntilDate (d) {
-        return d - new Date()
-      }
-
-      function checkTimeAndSetTimeout () {
-        var formTime = checkTimeForm()
-        var timeLeft = timeUntilDate(formTime)
-        console.log("time left", timeLeft)
-        createPlayer(timeLeft)
-        // setTimeout(createPlayer, 0)
-        // ^ this doesn't work, I think the player needs to be created
-        // in the same execution step as some human input
-      }
-
-      // create player when the user clicks submit
-      function createPlayer (timeLeft) {
-        var inputField = document.getElementById('url')
-        var username = inputField.value
-
-        $.get('http://api.soundcloud.com/resolve?url=http://soundcloud.com/' + username + '/likes&client_id=' + CLIENT_ID,
-          function (playlist) {
-            var track = playlist[0]
-            var mp3_url = track.stream_url
-            setTimeout(playTrack, 10000 + timeLeft, mp3_url)
-            showAlert('alarm set! playing ' + track.title +
-                      ', by ' + track.user.username +
-                      ' in ' + timeLeft / 1000 / 60 / 60 + ' hours')
-          }
-        )
-
-        // play it at the proper alarm clock time
-
-      }
-
-      function playTrack (mp3_url) {
-        console.log('playing track')
-        // code here
-        var context = new webkitAudioContext(),
-            audio = new Audio(),
-            source,
-            // `stream_url` you'd get from
-            // requesting http://api.soundcloud.com/tracks/6981096.json
-            url = mp3_url + '?client_id=' + CLIENT_ID;
-        audio.crossOrigin = "anonymous"; // via http://stackoverflow.com/questions/31308679/mediaelementaudiosource-outputs-zeros-due-to-cors-access-restrictions-local-mp3
-        audio.src = url;
-        source = context.createMediaElementSource(audio);
-        source.connect(context.destination);
-        source.mediaElement.play();
-      }
-    </script>
   </body>
 </html>

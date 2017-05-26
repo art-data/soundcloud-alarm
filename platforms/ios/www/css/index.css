@@ -1,0 +1,240 @@
+html {
+width: 100%;
+}
+body {
+  /*display: block;*/
+  font-family: "Lucida Grande", sans-serif;
+  width: 320px;
+  margin: 0 auto;
+  padding: 10px;
+
+  background: linear-gradient(57deg, #f0641b, #ff2951, #fe6211, #ffca51);
+  background-size: 1200% 1200%;
+
+  -webkit-animation: AnimationName 33s ease infinite;
+  -moz-animation: AnimationName 33s ease infinite;
+  animation: AnimationName 33s ease infinite;
+
+}
+@-webkit-keyframes AnimationName {
+  0%{background-position:0% 25%}
+  50%{background-position:100% 76%}
+  100%{background-position:0% 25%}
+}
+@-moz-keyframes AnimationName {
+  0%{background-position:0% 25%}
+  50%{background-position:100% 76%}
+  100%{background-position:0% 25%}
+}
+@keyframes AnimationName {
+  0%{background-position:0% 25%}
+  50%{background-position:100% 76%}
+  100%{background-position:0% 25%}
+}
+input, p, button {
+  width: 100%;
+}
+#alerts {
+  padding: 1em 0 0.5em;
+}
+p {
+  font-size: 1.5em;
+  color: #fff;
+  text-align: center;
+  margin: auto;
+}
+input {
+  font-family: "Arial";
+  border: 0 solid #f50;
+  margin: 1em auto;
+  background: #fff;
+  color: #000;
+  -webkit-appearance: none;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  width: 80%;
+  display: block;
+  margin: 2em auto;
+  height: 40px;
+  padding-left: 15px;
+}
+#info {
+  display: none;
+}
+#go {
+  background-color: transparent;
+  outline: 0;
+  border: 2px solid white;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 800;
+  padding: 1.5em 0;
+  border-radius: 4px;
+  width: 80%;
+  margin-bottom: 1em;
+}
+textarea:focus, input:focus {
+  color: #000;
+  background-color: #fff;
+  border: 0;
+  height: 40px;
+  line-height: 20px;
+}
+h2 {
+  font-size: 22px;
+  text-align: center;
+  font-weight: 800;
+  color: white;
+}
+#url {
+  -webkit-text-fill-color: #000;
+  color: #000;
+  height: 40px;
+}
+.secondary {
+  position: relative;
+  bottom: 10%;
+}
+/* player css */
+/*iframe {
+  display: none;
+}*/
+
+.player {
+  width: 600px;
+  height: 150px;
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  margin-left: -300px;
+  margin-top: -150px;
+  border-radius: 2px;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
+}
+
+.art {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  float: left;
+  width: 150px;
+  background: #DDD;
+  background-image: url('');
+  background-size: cover;
+  background-position: center;
+}
+
+.info {
+  margin-top: 2%;
+  width: 100%;
+  height: 50px;
+  color: #555;
+}
+
+.info .title {
+  padding-left: 35px;
+  color: black;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.info .song {
+  padding-left: 180px;
+  margin: 5px;
+  color: black;
+  font-weight: bold;
+}
+
+.info .progress {
+  cursor: pointer;
+  clear: both;
+  overflow: hidden;
+  position: relative;
+  height: 4px;
+  width: 55%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  background: #555;
+  left: 31%;
+  bottom: 65px
+}
+
+.progress .progress-bar {
+  background: #cdd2d7;
+  position: relative;
+  color: black;
+  display: inline-block;
+  width: 140px;
+  height: 16px;
+}
+
+.controls {
+  position: relative;
+  margin: 4.5% 0% 0% 0%;
+  padding: 0 10%;
+}
+
+.controls button {
+  background: #333;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  position: absolute;
+  height: 27px;
+  width: 27px;
+  border: none;
+  text-align: center;
+  background: #414141;
+  color: #d9d9d9;
+  border-radius: 50%;
+  font-size: 0.8em;
+  transition: .1s;
+  line-height: 1em;
+  opacity: 0.6;
+}
+
+.controls button:hover {
+  opacity: 100;
+}
+
+.controls button:active {
+  opacity: 0.8;
+}
+
+.controls .play {
+  height: 37px;
+  width: 37px;
+  font-size: 1.2em;
+  line-height: 33.5px;
+  right: 85%
+}
+
+.controls .backward,
+.controls .forward {
+  top: 1em;
+  font-size: .5em;
+  letter-spacing: .4em;
+  line-height: .7em;
+}
+
+.controls .backward {
+  left: 2.5%;
+}
+
+.controls .forward {
+  left: 17%;
+  letter-spacing: 1.2em;
+  text-align: right;
+}
+
+.controls .settings {
+  cursor: pointer;
+  color: #CCC11;
+  float: right;
+  margin-top: 6.1%;
+  left: 40px;
+}
+
+.controls .settings:hover {
+  color: #AAA;
+}
